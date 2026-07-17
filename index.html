@@ -253,6 +253,16 @@
     @media (prefers-reduced-motion:reduce){
       .lb-reveal,[style*="lb-float"]{animation:none!important;}
     }
+
+    .lb-loop-card{background:#D6E2FA;border:1px solid rgba(149,177,238,.25);border-radius:var(--radius-lg);padding:11px 11px 12px;box-shadow:var(--shadow-card);text-align:center;cursor:pointer;transform:scale(1);transition:background .22s ease,border-color .22s ease,box-shadow .22s ease,transform .22s ease;}
+    .lb-loop-node.lb-on{z-index:3!important;}
+    .lb-loop-node.lb-on .lb-loop-card{background:var(--color-brand-primary);border-color:var(--color-brand-primary);box-shadow:var(--shadow-elevated);transform:scale(1.06);}
+    .lb-loop-card .lb-num{width:28px;height:28px;margin:0 auto 7px;border-radius:var(--radius-pill);background:rgba(255,255,255,.6);color:var(--chip-mined-text);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-weight:500;font-size:14px;flex-shrink:0;}
+    .lb-loop-node.lb-on .lb-num{background:rgba(255,255,255,.9);color:var(--color-brand-primary);}
+    .lb-loop-card .lb-name{font-weight:600;font-size:13px;margin-bottom:3px;color:var(--color-text-primary);}
+    .lb-loop-node.lb-on .lb-name{color:#fff;}
+    .lb-loop-card .lb-see{font-size:10px;line-height:1.35;text-wrap:pretty;color:var(--color-text-secondary);}
+    .lb-loop-node.lb-on .lb-see{color:rgba(255,255,255,.88);}
     .lb-app button{border-radius:999px!important;}
     .lb-cta button{background:#1746BA!important;border-color:#1746BA!important;color:#fff!important;transition:filter .15s ease!important;}
     .lb-cta button:hover{filter:brightness(1.12);}
@@ -302,7 +312,7 @@
   <section id="top" style="position: relative; z-index: 1;">
     <div style="max-width: 900px; margin: 0px auto; padding: clamp(56px, 8vw, 104px) 28px 0px; text-align: center;">
       
-      <h1 style="font-family: var(--font-serif); font-weight: 500; font-size: clamp(44px, 7vw, 82px); line-height: 1; letter-spacing: -0.02em; margin: 0px 0px 24px; color: var(--color-text-primary); text-wrap: balance;">Where company AI<br><span style="display: inline-block; background: var(--brand-peach); color: var(--peach-text); border-radius: var(--radius-md); padding: 0.02em 0.24em; margin: 0px 0.04em; font-family: var(--font-serif); font-weight: 500; animation-name: lb-fade-up; animation-duration: var(--duration-base); animation-fill-mode: both;">skills</span><br>compound.</h1>
+      <h1 style="font-family: var(--font-serif); font-weight: 500; font-size: clamp(44px, 7vw, 82px); line-height: 1; letter-spacing: -0.02em; margin: 0px 0px 24px; color: var(--color-text-primary); text-wrap: balance;">Where company AI<br><span id="lb-word-pill" style="display: inline-block; background: var(--brand-peach); color: var(--peach-text); border-radius: var(--radius-md); padding: 0.02em 0.24em; margin: 0px 0.04em; font-family: var(--font-serif); font-weight: 500; animation-name: lb-fade-up; animation-duration: var(--duration-base); animation-fill-mode: both;">skills</span><br>compound.</h1>
       <p style="font-size: clamp(17px, 2vw, 21px); line-height: 1.5; color: var(--color-text-secondary); max-width: 34ch; margin: 0px auto 34px;">Turn your team's best AI work into a shared library everyone can reuse.</p>
     </div>
 
@@ -445,7 +455,7 @@
       <div class="lb-heading-mid lb-reveal" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
         <img src="assets/capi-mark-blue.png" alt="Capi" style="height: 44px; width: auto; display: block; margin-bottom: 22px;">
         <h2 style="font-family: var(--font-serif); font-weight: 500; font-size: clamp(32px, 4.6vw, 54px); line-height: 1.04; letter-spacing: -0.02em; margin: 0px 0px 18px; color: var(--color-text-primary); text-wrap: balance;">Whole-company AI capability.</h2>
-        <p style="font-size: clamp(16px, 1.9vw, 19px); line-height: 1.5; color: var(--color-text-secondary); text-wrap: pretty;">A capability is any proven way your team works with AI: a skill, workflow, agent, connector, or doc. Every one lives in a single place, not scattered across people's separate chats.</p>
+        <p style="font-size: clamp(16px, 1.9vw, 19px); line-height: 1.5; color: var(--color-text-secondary); text-wrap: pretty;">Any proven way your team works with AI: a skill, workflow, agent, connector, or doc. One library, not a hundred scattered chats.</p>
         <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 22px;">
           <span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-secondary); padding: 5px 12px; border: 1px solid var(--color-border-default); border-radius: var(--radius-pill); background: var(--color-bg-surface);">skills</span>
           <span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-secondary); padding: 5px 12px; border: 1px solid var(--color-border-default); border-radius: var(--radius-pill); background: var(--color-bg-surface);">workflows</span>
@@ -519,8 +529,8 @@
           <h2 style="font-family: var(--font-serif); font-weight: 500; font-size: clamp(30px, 4.2vw, 48px); line-height: 1.06; letter-spacing: -0.02em; margin: 0px 0px 20px; color: var(--color-text-primary); text-wrap: balance;">Find and reuse what a colleague already solved.</h2>
           <p style="font-size: clamp(15px, 1.8vw, 18px); line-height: 1.6; color: var(--color-text-secondary); max-width: 46ch; margin-bottom: 22px;">Search the capability library before you start from scratch. Five kinds, one searchable place.</p>
           <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 22px;">
-            <div style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--chip-new-text); font-weight: 700; flex-shrink: 0;">→</span><p style="font-size: 14px; line-height: 1.5; color: var(--color-text-secondary);">Your assistant finds it for you: apps connected to the Capi MCP server search the library mid-task and pull in the right capability, current and approved.</p></div>
-            <div style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--chip-new-text); font-weight: 700; flex-shrink: 0;">→</span><p style="font-size: 14px; line-height: 1.5; color: var(--color-text-secondary);">Served straight into Claude, ChatGPT, Perplexity, and any AI app your team uses.</p></div>
+            <div style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--chip-new-text); font-weight: 700; flex-shrink: 0;">→</span><p style="font-size: 14px; line-height: 1.5; color: var(--color-text-secondary);">Your assistant finds it for you: apps on the Capi MCP server pull in the right capability mid-task.</p></div>
+            <div style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--chip-new-text); font-weight: 700; flex-shrink: 0;">→</span><p style="font-size: 14px; line-height: 1.5; color: var(--color-text-secondary);">Shows up right inside the AI apps your team already uses.</p></div>
           </div>
           <div style="display: flex; flex-wrap: wrap; gap: 8px;">
             
@@ -545,10 +555,10 @@
           <h2 style="font-family: var(--font-serif); font-weight: 500; font-size: clamp(30px, 4.2vw, 48px); line-height: 1.06; letter-spacing: -0.02em; margin: 0px 0px 20px; color: var(--color-text-primary); text-wrap: balance;">Govern AI without slowing people down.</h2>
           <p style="font-size: clamp(15px, 1.8vw, 18px); line-height: 1.6; color: var(--color-text-secondary); max-width: 46ch; margin-bottom: 22px;">Every change is a new version: proposed with evidence, reviewed by named people, and published with a full audit trail. Nothing changes silently.</p>
           <div style="display: flex; flex-direction: column; gap: 12px;">
-            <div style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--peach-text); font-weight: 700; flex-shrink: 0;">→</span><p style="font-size: 14px; line-height: 1.5; color: var(--color-text-secondary);">Scoped by team, so finance and HR capabilities stay invisible to everyone outside them.</p></div>
-            <div style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--peach-text); font-weight: 700; flex-shrink: 0;">→</span><p style="font-size: 14px; line-height: 1.5; color: var(--color-text-secondary);">Secrets and sensitive data are redacted on capture, before anything is stored.</p></div>
-            <div style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--peach-text); font-weight: 700; flex-shrink: 0;">→</span><p style="font-size: 14px; line-height: 1.5; color: var(--color-text-secondary);">Full version history, with one-click rollback to any prior version.</p></div>
-            <div style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--peach-text); font-weight: 700; flex-shrink: 0;">→</span><p style="font-size: 14px; line-height: 1.5; color: var(--color-text-secondary);">Everyone stays on the approved version. Upstream changes arrive as proposals, never as surprises.</p></div>
+            <div style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--peach-text); font-weight: 700; flex-shrink: 0;">→</span><p style="font-size: 14px; line-height: 1.5; color: var(--color-text-secondary);">Your team's work stays visible to your team only.</p></div>
+            <div style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--peach-text); font-weight: 700; flex-shrink: 0;">→</span><p style="font-size: 14px; line-height: 1.5; color: var(--color-text-secondary);">Secrets are stripped out before anything is saved.</p></div>
+            <div style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--peach-text); font-weight: 700; flex-shrink: 0;">→</span><p style="font-size: 14px; line-height: 1.5; color: var(--color-text-secondary);">Every version is kept, so you can roll back in one click.</p></div>
+            <div style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--peach-text); font-weight: 700; flex-shrink: 0;">→</span><p style="font-size: 14px; line-height: 1.5; color: var(--color-text-secondary);">Updates show up as proposals, so nothing changes behind your back.</p></div>
           </div>
         </div>
         <div style="position: relative;">
@@ -595,43 +605,43 @@
               <span style="font-family: var(--font-serif); font-size: clamp(15px, 2.4vw, 20px); color: var(--color-text-primary); margin-top: 4px; line-height: 1.1;">Loop runs<br>continuously</span>
             </div>
             
-              <div style="position: absolute; left: 50%; top: 10%; transform: translate(-50%, -50%); width: clamp(108px, 13.5vw, 152px); z-index: 3;">
-                <div style="background: var(--color-brand-primary); border: 1px solid var(--color-brand-primary); border-radius: var(--radius-lg); padding: 11px 11px 12px; box-shadow: var(--shadow-elevated); text-align: center; cursor: pointer; transform: scale(1.06); transition: background 0.22s, border-color 0.22s, box-shadow 0.22s, transform 0.22s;">
-                  <div style="width: 28px; height: 28px; margin: 0px auto 7px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.9); color: var(--color-brand-primary); border: 1px solid transparent; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-weight: 500; font-size: 14px; flex-shrink: 0;"><span class="sc-interp">1</span></div>
-                  <div style="font-weight: 600; font-size: 13px; margin-bottom: 3px; color: rgb(255, 255, 255);"><span class="sc-interp">Capture</span></div>
-                  <div style="font-size: 10px; line-height: 1.35; text-wrap: pretty; color: rgba(255, 255, 255, 0.88);"><span class="sc-interp">Work happens in Claude, ChatGPT, Perplexity, or added directly.</span></div>
+              <div class="lb-loop-node lb-on" data-lb-card="0" style="position: absolute; left: 50%; top: 10%; transform: translate(-50%, -50%); width: clamp(108px, 13.5vw, 152px); z-index: 2;">
+                <div class="lb-loop-card">
+                  <div class="lb-num">1</div>
+                  <div class="lb-name">Capture</div>
+                  <div class="lb-see">Work happens in Claude, ChatGPT, Perplexity, or added directly.</div>
                 </div>
               </div>
             
-              <div style="position: absolute; left: 88.0423%; top: 37.6393%; transform: translate(-50%, -50%); width: clamp(108px, 13.5vw, 152px); z-index: 2;">
-                <div style="background: rgb(214, 226, 250); border: 1px solid rgba(149, 177, 238, 0.25); border-radius: var(--radius-lg); padding: 11px 11px 12px; box-shadow: var(--shadow-card); text-align: center; cursor: pointer; transform: scale(1); transition: background 0.22s, border-color 0.22s, box-shadow 0.22s, transform 0.22s;">
-                  <div style="width: 28px; height: 28px; margin: 0px auto 7px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.6); color: var(--chip-mined-text); border: 1px solid transparent; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-weight: 500; font-size: 14px; flex-shrink: 0;"><span class="sc-interp">2</span></div>
-                  <div style="font-weight: 600; font-size: 13px; margin-bottom: 3px; color: var(--color-text-primary);"><span class="sc-interp">Learn</span></div>
-                  <div style="font-size: 10px; line-height: 1.35; text-wrap: pretty; color: var(--color-text-secondary);"><span class="sc-interp">Recurring patterns across people and teams are recognized.</span></div>
+              <div class="lb-loop-node" data-lb-card="1" style="position: absolute; left: 88.0423%; top: 37.6393%; transform: translate(-50%, -50%); width: clamp(108px, 13.5vw, 152px); z-index: 2;">
+                <div class="lb-loop-card">
+                  <div class="lb-num">2</div>
+                  <div class="lb-name">Learn</div>
+                  <div class="lb-see">Recurring patterns across people and teams are recognized.</div>
                 </div>
               </div>
             
-              <div style="position: absolute; left: 73.5114%; top: 82.3607%; transform: translate(-50%, -50%); width: clamp(108px, 13.5vw, 152px); z-index: 2;">
-                <div style="background: rgb(214, 226, 250); border: 1px solid rgba(149, 177, 238, 0.25); border-radius: var(--radius-lg); padding: 11px 11px 12px; box-shadow: var(--shadow-card); text-align: center; cursor: pointer; transform: scale(1); transition: background 0.22s, border-color 0.22s, box-shadow 0.22s, transform 0.22s;">
-                  <div style="width: 28px; height: 28px; margin: 0px auto 7px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.6); color: var(--chip-mined-text); border: 1px solid transparent; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-weight: 500; font-size: 14px; flex-shrink: 0;"><span class="sc-interp">3</span></div>
-                  <div style="font-weight: 600; font-size: 13px; margin-bottom: 3px; color: var(--color-text-primary);"><span class="sc-interp">Review</span></div>
-                  <div style="font-size: 10px; line-height: 1.35; text-wrap: pretty; color: var(--color-text-secondary);"><span class="sc-interp">A human checks it, or it's auto-approved when it passes the guardrails an admin set.</span></div>
+              <div class="lb-loop-node" data-lb-card="2" style="position: absolute; left: 73.5114%; top: 82.3607%; transform: translate(-50%, -50%); width: clamp(108px, 13.5vw, 152px); z-index: 2;">
+                <div class="lb-loop-card">
+                  <div class="lb-num">3</div>
+                  <div class="lb-name">Review</div>
+                  <div class="lb-see">A human checks it, or it's auto-approved when it passes the guardrails an admin set.</div>
                 </div>
               </div>
             
-              <div style="position: absolute; left: 26.4886%; top: 82.3607%; transform: translate(-50%, -50%); width: clamp(108px, 13.5vw, 152px); z-index: 2;">
-                <div style="background: rgb(214, 226, 250); border: 1px solid rgba(149, 177, 238, 0.25); border-radius: var(--radius-lg); padding: 11px 11px 12px; box-shadow: var(--shadow-card); text-align: center; cursor: pointer; transform: scale(1); transition: background 0.22s, border-color 0.22s, box-shadow 0.22s, transform 0.22s;">
-                  <div style="width: 28px; height: 28px; margin: 0px auto 7px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.6); color: var(--chip-mined-text); border: 1px solid transparent; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-weight: 500; font-size: 14px; flex-shrink: 0;"><span class="sc-interp">4</span></div>
-                  <div style="font-weight: 600; font-size: 13px; margin-bottom: 3px; color: var(--color-text-primary);"><span class="sc-interp">Publish</span></div>
-                  <div style="font-size: 10px; line-height: 1.35; text-wrap: pretty; color: var(--color-text-secondary);"><span class="sc-interp">The approved capability becomes a new, versioned release.</span></div>
+              <div class="lb-loop-node" data-lb-card="3" style="position: absolute; left: 26.4886%; top: 82.3607%; transform: translate(-50%, -50%); width: clamp(108px, 13.5vw, 152px); z-index: 2;">
+                <div class="lb-loop-card">
+                  <div class="lb-num">4</div>
+                  <div class="lb-name">Publish</div>
+                  <div class="lb-see">The approved capability becomes a new, versioned release.</div>
                 </div>
               </div>
             
-              <div style="position: absolute; left: 11.9577%; top: 37.6393%; transform: translate(-50%, -50%); width: clamp(108px, 13.5vw, 152px); z-index: 2;">
-                <div style="background: rgb(214, 226, 250); border: 1px solid rgba(149, 177, 238, 0.25); border-radius: var(--radius-lg); padding: 11px 11px 12px; box-shadow: var(--shadow-card); text-align: center; cursor: pointer; transform: scale(1); transition: background 0.22s, border-color 0.22s, box-shadow 0.22s, transform 0.22s;">
-                  <div style="width: 28px; height: 28px; margin: 0px auto 7px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.6); color: var(--chip-mined-text); border: 1px solid transparent; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-weight: 500; font-size: 14px; flex-shrink: 0;"><span class="sc-interp">5</span></div>
-                  <div style="font-weight: 600; font-size: 13px; margin-bottom: 3px; color: var(--color-text-primary);"><span class="sc-interp">Reuse</span></div>
-                  <div style="font-size: 10px; line-height: 1.35; text-wrap: pretty; color: var(--color-text-secondary);"><span class="sc-interp">Any AI app on your team can discover and use it.</span></div>
+              <div class="lb-loop-node" data-lb-card="4" style="position: absolute; left: 11.9577%; top: 37.6393%; transform: translate(-50%, -50%); width: clamp(108px, 13.5vw, 152px); z-index: 2;">
+                <div class="lb-loop-card">
+                  <div class="lb-num">5</div>
+                  <div class="lb-name">Reuse</div>
+                  <div class="lb-see">Any AI app on your team can discover and use it.</div>
                 </div>
               </div>
             
@@ -639,44 +649,159 @@
 
           
           <div style="display: flex; flex-direction: column; gap: 14px; min-width: 0px;">
-            <div class="lb-loop-detail" style="height: 528px; overflow-y: auto; background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-2xl); box-shadow: var(--shadow-card); padding: 26px 28px; display: flex; flex-direction: column; gap: 18px; width: 403px;">
+            <div class="lb-loop-detail" data-lb-panel="0" style="display: flex; height: 528px; overflow-y: auto; background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-2xl); box-shadow: var(--shadow-card); padding: 26px 28px; flex-direction: column; gap: 18px; width: 403px;">
               <div>
-                <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brand-primary);"><span class="sc-interp">Stage 1 of 5</span></div>
-                <h3 style="font-family: var(--font-serif); font-weight: 500; font-size: clamp(30px, 3.6vw, 42px); line-height: 1; letter-spacing: -0.02em; margin: 10px 0px 0px; color: var(--color-text-primary);"><span class="sc-interp">Capture</span></h3>
-                <p style="font-size: 15px; line-height: 1.55; color: var(--color-text-secondary); margin: 14px 0px 0px; max-width: 44ch; text-wrap: pretty;"><span class="sc-interp">Work happens in Claude, ChatGPT, Perplexity, or added directly.</span></p>
+                <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brand-primary);">Stage 1 of 5</div>
+                <h3 style="font-family: var(--font-serif); font-weight: 500; font-size: clamp(30px, 3.6vw, 42px); line-height: 1; letter-spacing: -0.02em; margin: 10px 0px 0px; color: var(--color-text-primary);">Capture</h3>
+                <p style="font-size: 15px; line-height: 1.55; color: var(--color-text-secondary); margin: 14px 0px 0px; max-width: 44ch; text-wrap: pretty;">Work happens in Claude, ChatGPT, Perplexity, or added directly.</p>
               </div>
-
-              
-
               <div style="border: 1px solid var(--color-border-subtle); border-radius: var(--radius-xl); padding: 20px 22px; background: var(--color-bg-surface);">
-                <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-brand-primary); margin-bottom: 14px;"><span class="sc-interp">What gets captured</span></div>
+                <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-brand-primary); margin-bottom: 14px;">What gets captured</div>
                 <div style="display: flex; flex-direction: column; gap: 12px;">
-                  
                     <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
-                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span><span class="sc-interp">Prompts, documents, and chat threads</span></span>
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>Prompts, documents, and chat threads</span>
                     </div>
-                  
                     <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
-                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span><span class="sc-interp">Decisions, outputs, and feedback</span></span>
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>Decisions, outputs, and feedback</span>
                     </div>
-                  
                     <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
-                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span><span class="sc-interp">Screenshots, files, and references</span></span>
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>Screenshots, files, and references</span>
                     </div>
-                  
                     <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
-                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span><span class="sc-interp">Manual notes and team inputs</span></span>
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>Manual notes and team inputs</span>
                     </div>
-                  
                 </div>
               </div>
-
               <div style="background: var(--color-brand-tint); border-radius: var(--radius-xl); padding: 18px 22px;">
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
                   <span style="width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--color-brand-primary); color: var(--color-brand-primary); display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-style: italic; font-family: var(--font-serif); flex-shrink: 0;">i</span>
                   <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-brand-primary);">Why it matters</span>
                 </div>
-                <p style="font-size: 14px; line-height: 1.5; color: var(--color-text-secondary); margin: 0px; text-wrap: pretty;"><span class="sc-interp">The more context we capture, the smarter everything downstream becomes.</span></p>
+                <p style="font-size: 14px; line-height: 1.5; color: var(--color-text-secondary); margin: 0px; text-wrap: pretty;">The more context we capture, the smarter everything downstream becomes.</p>
+              </div>
+            </div>
+            <div class="lb-loop-detail" data-lb-panel="1" style="display: none; height: 528px; overflow-y: auto; background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-2xl); box-shadow: var(--shadow-card); padding: 26px 28px; flex-direction: column; gap: 18px; width: 403px;">
+              <div>
+                <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brand-primary);">Stage 2 of 5</div>
+                <h3 style="font-family: var(--font-serif); font-weight: 500; font-size: clamp(30px, 3.6vw, 42px); line-height: 1; letter-spacing: -0.02em; margin: 10px 0px 0px; color: var(--color-text-primary);">Learn</h3>
+                <p style="font-size: 15px; line-height: 1.55; color: var(--color-text-secondary); margin: 14px 0px 0px; max-width: 44ch; text-wrap: pretty;">Recurring patterns across people and teams are recognized.</p>
+              </div>
+              <div style="border: 1px solid var(--color-border-subtle); border-radius: var(--radius-xl); padding: 20px 22px; background: var(--color-bg-surface);">
+                <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-brand-primary); margin-bottom: 14px;">What gets recognized</div>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>Prompts and workflows that repeat</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>The same steps done by different people</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>Tools and files that keep showing up together</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>Gaps: things people need that don't exist yet</span>
+                    </div>
+                </div>
+              </div>
+              <div style="background: var(--color-brand-tint); border-radius: var(--radius-xl); padding: 18px 22px;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                  <span style="width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--color-brand-primary); color: var(--color-brand-primary); display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-style: italic; font-family: var(--font-serif); flex-shrink: 0;">i</span>
+                  <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-brand-primary);">Why it matters</span>
+                </div>
+                <p style="font-size: 14px; line-height: 1.5; color: var(--color-text-secondary); margin: 0px; text-wrap: pretty;">A pattern only counts once it shows up across people, not once.</p>
+              </div>
+            </div>
+            <div class="lb-loop-detail" data-lb-panel="2" style="display: none; height: 528px; overflow-y: auto; background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-2xl); box-shadow: var(--shadow-card); padding: 26px 28px; flex-direction: column; gap: 18px; width: 403px;">
+              <div>
+                <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brand-primary);">Stage 3 of 5</div>
+                <h3 style="font-family: var(--font-serif); font-weight: 500; font-size: clamp(30px, 3.6vw, 42px); line-height: 1; letter-spacing: -0.02em; margin: 10px 0px 0px; color: var(--color-text-primary);">Review</h3>
+                <p style="font-size: 15px; line-height: 1.55; color: var(--color-text-secondary); margin: 14px 0px 0px; max-width: 44ch; text-wrap: pretty;">A human checks it, or it's auto-approved when it passes the guardrails an admin set.</p>
+              </div>
+              <div style="border: 1px solid var(--color-border-subtle); border-radius: var(--radius-xl); padding: 20px 22px; background: var(--color-bg-surface);">
+                <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-brand-primary); margin-bottom: 14px;">What gets checked</div>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>The real sessions behind the pattern</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>Who it came from, and how often</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>What it would replace or update</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>Ownership, risk, and access</span>
+                    </div>
+                </div>
+              </div>
+              <div style="background: var(--color-brand-tint); border-radius: var(--radius-xl); padding: 18px 22px;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                  <span style="width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--color-brand-primary); color: var(--color-brand-primary); display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-style: italic; font-family: var(--font-serif); flex-shrink: 0;">i</span>
+                  <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-brand-primary);">Why it matters</span>
+                </div>
+                <p style="font-size: 14px; line-height: 1.5; color: var(--color-text-secondary); margin: 0px; text-wrap: pretty;">Nothing publishes without a reason attached to it.</p>
+              </div>
+            </div>
+            <div class="lb-loop-detail" data-lb-panel="3" style="display: none; height: 528px; overflow-y: auto; background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-2xl); box-shadow: var(--shadow-card); padding: 26px 28px; flex-direction: column; gap: 18px; width: 403px;">
+              <div>
+                <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brand-primary);">Stage 4 of 5</div>
+                <h3 style="font-family: var(--font-serif); font-weight: 500; font-size: clamp(30px, 3.6vw, 42px); line-height: 1; letter-spacing: -0.02em; margin: 10px 0px 0px; color: var(--color-text-primary);">Publish</h3>
+                <p style="font-size: 15px; line-height: 1.55; color: var(--color-text-secondary); margin: 14px 0px 0px; max-width: 44ch; text-wrap: pretty;">The approved capability becomes a new, versioned release.</p>
+              </div>
+              <div style="border: 1px solid var(--color-border-subtle); border-radius: var(--radius-xl); padding: 20px 22px; background: var(--color-bg-surface);">
+                <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-brand-primary); margin-bottom: 14px;">What gets released</div>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>A named, versioned capability</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>Full history back to version one</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>A record of who approved it and when</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>A one-click path back to the prior version</span>
+                    </div>
+                </div>
+              </div>
+              <div style="background: var(--color-brand-tint); border-radius: var(--radius-xl); padding: 18px 22px;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                  <span style="width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--color-brand-primary); color: var(--color-brand-primary); display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-style: italic; font-family: var(--font-serif); flex-shrink: 0;">i</span>
+                  <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-brand-primary);">Why it matters</span>
+                </div>
+                <p style="font-size: 14px; line-height: 1.5; color: var(--color-text-secondary); margin: 0px; text-wrap: pretty;">Nothing is overwritten, so nothing is ever truly lost.</p>
+              </div>
+            </div>
+            <div class="lb-loop-detail" data-lb-panel="4" style="display: none; height: 528px; overflow-y: auto; background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-2xl); box-shadow: var(--shadow-card); padding: 26px 28px; flex-direction: column; gap: 18px; width: 403px;">
+              <div>
+                <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brand-primary);">Stage 5 of 5</div>
+                <h3 style="font-family: var(--font-serif); font-weight: 500; font-size: clamp(30px, 3.6vw, 42px); line-height: 1; letter-spacing: -0.02em; margin: 10px 0px 0px; color: var(--color-text-primary);">Reuse</h3>
+                <p style="font-size: 15px; line-height: 1.55; color: var(--color-text-secondary); margin: 14px 0px 0px; max-width: 44ch; text-wrap: pretty;">Any AI app on your team can discover and use it.</p>
+              </div>
+              <div style="border: 1px solid var(--color-border-subtle); border-radius: var(--radius-xl); padding: 20px 22px; background: var(--color-bg-surface);">
+                <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-brand-primary); margin-bottom: 14px;">What becomes available</div>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>Search from inside any connected AI app</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>The same capability, every time it's needed</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>Adoption and usage, tracked automatically</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.4; color: var(--color-text-primary);">
+                      <span style="color: var(--color-brand-primary); font-weight: 700; flex-shrink: 0;">✓</span><span>A head start for anyone new to the team</span>
+                    </div>
+                </div>
+              </div>
+              <div style="background: var(--color-brand-tint); border-radius: var(--radius-xl); padding: 18px 22px;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                  <span style="width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--color-brand-primary); color: var(--color-brand-primary); display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-style: italic; font-family: var(--font-serif); flex-shrink: 0;">i</span>
+                  <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-brand-primary);">Why it matters</span>
+                </div>
+                <p style="font-size: 14px; line-height: 1.5; color: var(--color-text-secondary); margin: 0px; text-wrap: pretty;">The next person starts from what already works, not from zero.</p>
               </div>
             </div>
 
@@ -864,6 +989,44 @@
       document.querySelectorAll('#lb-tabs video').forEach(function(v){ io.observe(v); });
     }
     showTab('Capture');
+
+    // Rotating hero word: direct DOM mutation, no re-render.
+    var lbWords=[
+      {label:'prompts', bg:'var(--brand-soft-lavender)', color:'var(--lavender-text)'},
+      {label:'skills', bg:'var(--brand-peach)', color:'var(--peach-text)'},
+      {label:'workflows', bg:'var(--brand-light-green)', color:'var(--chip-new-text)'},
+      {label:'agents', bg:'var(--chip-mined-bg)', color:'var(--chip-mined-text)'},
+      {label:'practices', bg:'var(--brand-sunshine)', color:'var(--brand-ink)'}
+    ];
+    var lbWi=1, lbPill=document.getElementById('lb-word-pill');
+    if(lbPill){
+      setInterval(function(){
+        lbWi=(lbWi+1)%lbWords.length;
+        var w=lbWords[lbWi];
+        lbPill.textContent=w.label;
+        lbPill.style.background=w.bg;
+        lbPill.style.color=w.color;
+        lbPill.style.animation='none';
+        void lbPill.offsetWidth;
+        lbPill.style.animation='';
+      }, 2600);
+    }
+
+    // Loop diagram: hover or click a stage card to switch the detail panel.
+    function lbSelectStage(i){
+      document.querySelectorAll('[data-lb-panel]').forEach(function(p){
+        p.style.display = Number(p.getAttribute('data-lb-panel'))===i ? 'flex' : 'none';
+      });
+      document.querySelectorAll('[data-lb-card]').forEach(function(c){
+        c.classList.toggle('lb-on', Number(c.getAttribute('data-lb-card'))===i);
+      });
+    }
+    document.querySelectorAll('[data-lb-card]').forEach(function(c){
+      var go=function(){ lbSelectStage(Number(c.getAttribute('data-lb-card'))); };
+      c.addEventListener('click', go);
+      c.addEventListener('mouseenter', go);
+    });
+
 
     // FAQ accordion
     document.querySelectorAll('.lb-faq-q').forEach(function(btn){
