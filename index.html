@@ -267,20 +267,33 @@
     .lb-cta button{background:#1746BA!important;border-color:#1746BA!important;color:#fff!important;transition:filter .15s ease!important;}
     .lb-cta button:hover{filter:brightness(1.12);}
     /* ---------- Phone refinements ---------- */
+    #lb-menu-btn{display:none;align-items:center;justify-content:center;width:38px;height:38px;padding:0;flex-shrink:0;border:1px solid var(--color-border-default);border-radius:10px;background:var(--color-bg-surface);color:var(--color-text-primary);cursor:pointer;}
+    #lb-menu-btn .lb-mi-close{display:none;}
+    header.lb-nav-open #lb-menu-btn .lb-mi-burger{display:none;}
+    header.lb-nav-open #lb-menu-btn .lb-mi-close{display:block;}
     @media (max-width:640px){
-      /* header: logo + CTA share the first row, nav gets its own row */
-      header>div{flex-wrap:wrap!important;padding:10px 16px!important;row-gap:2px!important;}
-      header>div>a{order:1;}
-      header button{order:2;padding:8px 13px!important;font-size:12px!important;white-space:nowrap;}
-      header nav{order:3;flex-basis:100%;justify-content:center;gap:22px!important;}
+      /* header: one compact row — logo left, CTA + hamburger right; nav drops down */
+      header>div{padding:10px 16px!important;gap:12px!important;}
       header>div>a img{height:38px!important;width:76px!important;}
-      .lb-navlink{white-space:nowrap;}
+      header button[data-lb-mailto]{margin-left:auto;padding:8px 13px!important;font-size:12px!important;white-space:nowrap;}
+      #lb-menu-btn{display:inline-flex!important;}
+      header nav{position:absolute;top:100%;left:0;right:0;display:none!important;flex-direction:column;align-items:stretch;gap:0!important;padding:6px 10px 10px;background:var(--brand-warm-white);border-bottom:1px solid var(--color-border-subtle);box-shadow:0 18px 32px -22px rgba(16,24,40,.3);}
+      header.lb-nav-open nav{display:flex!important;}
+      header nav .lb-navlink{font-size:16px;padding:13px 12px;border-radius:10px;white-space:nowrap;}
+      header nav .lb-navlink:active{background:var(--blue-50);}
       /* the one heading with a hardcoded desktop size */
       #how>.lb-reveal h2{font-size:clamp(38px,11vw,60px)!important;}
-      /* loop diagram: shrink the circle and its stage cards to fit the phone */
-      .lb-loop-grid{--loop-dia:min(82vw,320px)!important;}
-      .lb-loop-grid div[style*="width: clamp(108px"]{width:clamp(92px,26vw,108px)!important;}
-      .lb-loop-grid div[style*="width: clamp(108px"] div[style*="font-size: 10px"]{display:none;}
+      /* loop diagram: the circle becomes a row of tappable stage chips above the panel */
+      .lb-loop-grid{margin-top:28px!important;gap:18px!important;}
+      .lb-loop-grid>div:first-child{width:100%!important;height:auto!important;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;}
+      .lb-loop-grid>div:first-child>div:not(.lb-loop-node){display:none!important;}
+      .lb-loop-node{position:static!important;transform:none!important;width:auto!important;}
+      .lb-loop-node.lb-on .lb-loop-card{transform:scale(1.03);}
+      .lb-loop-card{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 9px;border-radius:999px;}
+      .lb-loop-card .lb-num{margin:0;width:22px;height:22px;font-size:12px;}
+      .lb-loop-card .lb-name{margin:0;font-size:14px;}
+      .lb-loop-card .lb-see{display:none;}
+      .lb-loop-detail{width:auto!important;padding:22px 20px!important;}
       /* footer: keep the watermark tucked in the corner, shrink the logo */
       footer div[aria-hidden="true"]{font-size:44vw!important;right:-6%!important;}
       footer a img{height:56px!important;width:112px!important;}
@@ -305,6 +318,12 @@
         <a href="#faq" class="lb-navlink">FAQ</a>
       </nav>
       <span class="lb-cta" style="display: contents;"><div class="sc-host-x" style="display: contents;"><button style="display: inline-flex; align-items: center; gap: 7px; padding: 10px 16px; font: 600 13px Inter, sans-serif; border-radius: var(--radius-md); cursor: pointer; opacity: 1; transition: background 150ms, border-color 150ms; background: var(--color-brand-primary); color: var(--color-text-inverse); border: 0px;" data-lb-mailto="early">Get early access</button></div></span>
+      <button id="lb-menu-btn" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+          <g class="lb-mi-burger" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h16M3 11h16M3 16h16"></path></g>
+          <g class="lb-mi-close" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 5l12 12M17 5L5 17"></path></g>
+        </svg>
+      </button>
     </div>
   </header>
 
@@ -1026,6 +1045,22 @@
       c.addEventListener('click', go);
       c.addEventListener('mouseenter', go);
     });
+
+    // Phone menu: hamburger toggles the nav dropdown; any link tap closes it.
+    var lbHeader=document.querySelector('header');
+    var lbMenuBtn=document.getElementById('lb-menu-btn');
+    if(lbHeader && lbMenuBtn){
+      lbMenuBtn.addEventListener('click', function(){
+        var open=lbHeader.classList.toggle('lb-nav-open');
+        lbMenuBtn.setAttribute('aria-expanded', open?'true':'false');
+      });
+      lbHeader.querySelectorAll('nav a').forEach(function(a){
+        a.addEventListener('click', function(){
+          lbHeader.classList.remove('lb-nav-open');
+          lbMenuBtn.setAttribute('aria-expanded','false');
+        });
+      });
+    }
 
 
     // FAQ accordion
