@@ -234,6 +234,8 @@
       .lb-mosaic-cols>div{margin-top:0!important;max-width:380px!important;width:100%!important;}
       .lb-center-pill{position:static!important;transform:none!important;margin:4px auto!important;}
       .lb-loop-legend{grid-template-columns:1fr!important;}
+      /* feature sections stack as text first, image second — never reversed */
+      #how .lb-reveal>div[style*="position: relative"],#how .lb-reveal>div[style*="position:relative"]{order:9!important;}
     }
     .lb-mosaic-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,400px) minmax(0,1fr);gap:clamp(18px,2.2vw,40px);align-items:center;justify-content:center;}
     .lb-mcol{display:flex;flex-direction:column;gap:clamp(14px,1.7vw,22px);align-items:center;}
@@ -266,6 +268,9 @@
     .lb-app button{border-radius:999px!important;}
     .lb-cta button{background:#1746BA!important;border-color:#1746BA!important;color:#fff!important;transition:filter .15s ease!important;}
     .lb-cta button:hover{filter:brightness(1.12);}
+    /* hero tab strip: swipeable on phones, but never show a scrollbar */
+    #lb-tabs [style*="overflow-x: auto"],#lb-tabs [style*="overflow-x:auto"]{scrollbar-width:none;-ms-overflow-style:none;}
+    #lb-tabs [style*="overflow-x: auto"]::-webkit-scrollbar,#lb-tabs [style*="overflow-x:auto"]::-webkit-scrollbar{display:none;}
     /* ---------- Phone refinements ---------- */
     #lb-menu-btn{display:none;align-items:center;justify-content:center;width:38px;height:38px;padding:0;flex-shrink:0;border:1px solid var(--color-border-default);border-radius:10px;background:var(--color-bg-surface);color:var(--color-text-primary);cursor:pointer;}
     #lb-menu-btn .lb-mi-close{display:none;}
@@ -342,7 +347,7 @@
           
             <button style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 9px 16px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; font-family: var(--font-grotesk); white-space: nowrap; transition: all var(--duration-fast) var(--ease-standard); background: var(--color-brand-primary); color: rgb(255, 255, 255);" data-lb-go="Capture"><span class="sc-interp">Capture</span></button>
           
-            <button style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 9px 16px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; font-family: var(--font-grotesk); white-space: nowrap; transition: all var(--duration-fast) var(--ease-standard); background: transparent; color: var(--color-text-secondary);" data-lb-go="Capability library"><span class="sc-interp">Capability library</span></button>
+            <button style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 9px 16px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; font-family: var(--font-grotesk); white-space: nowrap; transition: all var(--duration-fast) var(--ease-standard); background: transparent; color: var(--color-text-secondary);" data-lb-go="Capability library"><span class="sc-interp">Capabilities</span></button>
           
             <button style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 9px 16px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; font-family: var(--font-grotesk); white-space: nowrap; transition: all var(--duration-fast) var(--ease-standard); background: transparent; color: var(--color-text-secondary);" data-lb-go="Review"><span class="sc-interp">Review</span></button>
           
@@ -371,7 +376,7 @@
           
             <button style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 9px 16px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; font-family: var(--font-grotesk); white-space: nowrap; transition: all var(--duration-fast) var(--ease-standard); background: transparent; color: var(--color-text-secondary);" data-lb-go="Capture"><span class="sc-interp">Capture</span></button>
           
-            <button style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 9px 16px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; font-family: var(--font-grotesk); white-space: nowrap; transition: all var(--duration-fast) var(--ease-standard); background: var(--color-brand-primary); color: rgb(255, 255, 255);" data-lb-go="Capability library"><span class="sc-interp">Capability library</span></button>
+            <button style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 9px 16px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; font-family: var(--font-grotesk); white-space: nowrap; transition: all var(--duration-fast) var(--ease-standard); background: var(--color-brand-primary); color: rgb(255, 255, 255);" data-lb-go="Capability library"><span class="sc-interp">Capabilities</span></button>
           
             <button style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 9px 16px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; font-family: var(--font-grotesk); white-space: nowrap; transition: all var(--duration-fast) var(--ease-standard); background: transparent; color: var(--color-text-secondary);" data-lb-go="Review"><span class="sc-interp">Review</span></button>
           
@@ -400,7 +405,7 @@
           
             <button style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 9px 16px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; font-family: var(--font-grotesk); white-space: nowrap; transition: all var(--duration-fast) var(--ease-standard); background: transparent; color: var(--color-text-secondary);" data-lb-go="Capture"><span class="sc-interp">Capture</span></button>
           
-            <button style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 9px 16px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; font-family: var(--font-grotesk); white-space: nowrap; transition: all var(--duration-fast) var(--ease-standard); background: transparent; color: var(--color-text-secondary);" data-lb-go="Capability library"><span class="sc-interp">Capability library</span></button>
+            <button style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 9px 16px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; font-family: var(--font-grotesk); white-space: nowrap; transition: all var(--duration-fast) var(--ease-standard); background: transparent; color: var(--color-text-secondary);" data-lb-go="Capability library"><span class="sc-interp">Capabilities</span></button>
           
             <button style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 9px 16px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; font-family: var(--font-grotesk); white-space: nowrap; transition: all var(--duration-fast) var(--ease-standard); background: var(--color-brand-primary); color: rgb(255, 255, 255);" data-lb-go="Review"><span class="sc-interp">Review</span></button>
           
@@ -429,7 +434,7 @@
           
             <button style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 9px 16px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; font-family: var(--font-grotesk); white-space: nowrap; transition: all var(--duration-fast) var(--ease-standard); background: transparent; color: var(--color-text-secondary);" data-lb-go="Capture"><span class="sc-interp">Capture</span></button>
           
-            <button style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 9px 16px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; font-family: var(--font-grotesk); white-space: nowrap; transition: all var(--duration-fast) var(--ease-standard); background: transparent; color: var(--color-text-secondary);" data-lb-go="Capability library"><span class="sc-interp">Capability library</span></button>
+            <button style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 9px 16px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; font-family: var(--font-grotesk); white-space: nowrap; transition: all var(--duration-fast) var(--ease-standard); background: transparent; color: var(--color-text-secondary);" data-lb-go="Capability library"><span class="sc-interp">Capabilities</span></button>
           
             <button style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 9px 16px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; font-family: var(--font-grotesk); white-space: nowrap; transition: all var(--duration-fast) var(--ease-standard); background: transparent; color: var(--color-text-secondary);" data-lb-go="Review"><span class="sc-interp">Review</span></button>
           
