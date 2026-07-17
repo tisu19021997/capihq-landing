@@ -266,11 +266,26 @@
     .lb-loop-card .lb-see{font-size:10px;line-height:1.35;text-wrap:pretty;color:var(--color-text-secondary);}
     .lb-loop-node.lb-on .lb-see{color:rgba(255,255,255,.88);}
     .lb-app button{border-radius:999px!important;}
-    .lb-cta button{background:#1746BA!important;border-color:#1746BA!important;color:#fff!important;transition:filter .15s ease!important;}
-    .lb-cta button:hover{filter:brightness(1.12);}
+    .lb-cta button{background:#1746BA!important;border-color:#1746BA!important;color:#fff!important;transition:filter .15s ease,translate .15s ease!important;}
+    .lb-cta button:hover{filter:brightness(1.12);translate:0 -1px;}
     /* hero tab strip: swipeable on phones, but never show a scrollbar */
     #lb-tabs [style*="overflow-x: auto"],#lb-tabs [style*="overflow-x:auto"]{scrollbar-width:none;-ms-overflow-style:none;}
     #lb-tabs [style*="overflow-x: auto"]::-webkit-scrollbar,#lb-tabs [style*="overflow-x:auto"]::-webkit-scrollbar{display:none;}
+    /* ---------- Scroll-reveal & micro-motion system ----------
+       JS tags elements with .lb-rv (+ staggered --rvd delays) and adds .lb-in
+       when they enter the viewport. Uses translate/scale properties, never
+       transform, so hover/positioning transforms are untouched. No JS = no
+       tagging = everything stays visible. */
+    .lb-anim .lb-reveal{animation:none!important;}
+    .lb-rv{opacity:0;translate:0 18px;transition:opacity .65s cubic-bezier(.2,.7,.2,1),translate .65s cubic-bezier(.2,.7,.2,1),scale .65s cubic-bezier(.2,.7,.2,1);transition-delay:var(--rvd,0ms);}
+    .lb-rv-pop{scale:.96;}
+    .lb-rv.lb-in{opacity:1;translate:0 0;scale:1;}
+    .lb-bar{transform-origin:50% 100%;scale:1 0;transition:scale .55s cubic-bezier(.2,.7,.2,1);transition-delay:var(--rvd,0ms);}
+    .lb-bar.lb-in{scale:1 1;}
+    @media (prefers-reduced-motion:no-preference){
+      .lb-loop-grid div[style*="dashed"]{animation:lb-spin 80s linear infinite;}
+    }
+    @keyframes lb-spin{to{rotate:360deg;}}
     /* ---------- Phone refinements ---------- */
     #lb-menu-btn{display:none;align-items:center;justify-content:center;width:38px;height:38px;padding:0;flex-shrink:0;border:1px solid var(--color-border-default);border-radius:10px;background:var(--color-bg-surface);color:var(--color-text-primary);cursor:pointer;}
     #lb-menu-btn .lb-mi-close{display:none;}
@@ -468,7 +483,7 @@
       
       <div class="lb-mcol">
         <div class="lb-float-card" style="rotate: -2deg;"></div>
-        <div class="lb-float-card" style="rotate: 1.5deg;"><div style="background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-xl); box-shadow: var(--shadow-card); padding: 16px 18px;"><div style="font-size: 12px; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 6px;">Reuse over time</div><div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: var(--font-serif); font-weight: 500; font-size: 38px; line-height: 1; color: var(--color-text-primary);">284</span><span style="display: inline-flex; align-items: center; gap: 3px; font-size: 13px; font-weight: 600; color: var(--color-positive);">▲ 38%</span></div><div style="font-size: 11px; color: var(--color-text-tertiary); margin-top: 4px;">total reuses · vs previous 30 days</div><div style="display: flex; align-items: flex-end; gap: 3px; height: 44px; margin-top: 12px;"><span style="flex: 1 1 0%; height: 30%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.5;"></span><span style="flex: 1 1 0%; height: 34%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.54;"></span><span style="flex: 1 1 0%; height: 40%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.57;"></span><span style="flex: 1 1 0%; height: 46%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.6;"></span><span style="flex: 1 1 0%; height: 42%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.64;"></span><span style="flex: 1 1 0%; height: 52%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.68;"></span><span style="flex: 1 1 0%; height: 48%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.71;"></span><span style="flex: 1 1 0%; height: 60%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.74;"></span><span style="flex: 1 1 0%; height: 55%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.78;"></span><span style="flex: 1 1 0%; height: 66%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.82;"></span><span style="flex: 1 1 0%; height: 62%; background: var(--blue-600); border-radius: 2px; opacity: 0.85;"></span><span style="flex: 1 1 0%; height: 74%; background: var(--blue-600); border-radius: 2px; opacity: 0.89;"></span><span style="flex: 1 1 0%; height: 80%; background: var(--blue-600); border-radius: 2px; opacity: 0.92;"></span><span style="flex: 1 1 0%; height: 92%; background: var(--blue-600); border-radius: 2px; opacity: 0.96;"></span></div></div></div>
+        <div class="lb-float-card" style="rotate: 1.5deg;"><div style="background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-xl); box-shadow: var(--shadow-card); padding: 16px 18px;"><div style="font-size: 12px; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 6px;">Reuse over time</div><div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: var(--font-serif); font-weight: 500; font-size: 38px; line-height: 1; color: var(--color-text-primary);" data-lb-count="284">284</span><span style="display: inline-flex; align-items: center; gap: 3px; font-size: 13px; font-weight: 600; color: var(--color-positive);">▲ 38%</span></div><div style="font-size: 11px; color: var(--color-text-tertiary); margin-top: 4px;">total reuses · vs previous 30 days</div><div style="display: flex; align-items: flex-end; gap: 3px; height: 44px; margin-top: 12px;"><span style="flex: 1 1 0%; height: 30%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.5;"></span><span style="flex: 1 1 0%; height: 34%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.54;"></span><span style="flex: 1 1 0%; height: 40%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.57;"></span><span style="flex: 1 1 0%; height: 46%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.6;"></span><span style="flex: 1 1 0%; height: 42%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.64;"></span><span style="flex: 1 1 0%; height: 52%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.68;"></span><span style="flex: 1 1 0%; height: 48%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.71;"></span><span style="flex: 1 1 0%; height: 60%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.74;"></span><span style="flex: 1 1 0%; height: 55%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.78;"></span><span style="flex: 1 1 0%; height: 66%; background: var(--brand-light-blue); border-radius: 2px; opacity: 0.82;"></span><span style="flex: 1 1 0%; height: 62%; background: var(--blue-600); border-radius: 2px; opacity: 0.85;"></span><span style="flex: 1 1 0%; height: 74%; background: var(--blue-600); border-radius: 2px; opacity: 0.89;"></span><span style="flex: 1 1 0%; height: 80%; background: var(--blue-600); border-radius: 2px; opacity: 0.92;"></span><span style="flex: 1 1 0%; height: 92%; background: var(--blue-600); border-radius: 2px; opacity: 0.96;"></span></div></div></div>
         <div class="lb-float-card" style="rotate: -1.5deg;"><div style="background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-xl); box-shadow: var(--shadow-card); padding: 14px 16px;"><div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;"><span style="width: 22px; height: 22px; border-radius: 6px; background: var(--chip-new-bg); color: var(--chip-new-text); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">✦</span><span style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em; color: var(--color-text-tertiary); text-transform: uppercase;">New</span></div><div style="font-size: 13px; line-height: 1.4; color: var(--color-text-primary); font-weight: 500;">3 new capabilities recorded from your session</div><div style="font-size: 11px; color: var(--color-text-tertiary); margin-top: 5px;">just now</div></div></div>
         <div class="lb-float-card" style="rotate: 2deg;"></div>
         <div class="lb-float-card" style="rotate: -1deg;"><div style="background: var(--color-bg-surface); border: 1px solid var(--color-border-default); border-radius: var(--radius-xl); box-shadow: var(--shadow-card); padding: 16px 18px;"><div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 12px;">Version history</div><div style="display: flex; flex-direction: column; gap: 11px;"><div style="display: flex; align-items: flex-start; gap: 9px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-positive); margin-top: 5px; flex-shrink: 0;"></span><div><span style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--color-text-primary);">v1.2</span> <span style="font-size: 12px; color: var(--color-text-secondary);">Approved · group blockers separately.</span></div></div><div style="display: flex; align-items: flex-start; gap: 9px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-positive); margin-top: 5px; flex-shrink: 0;"></span><div><span style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--color-text-primary);">v1.1</span> <span style="font-size: 12px; color: var(--color-text-secondary);">Approved · handle empty threads.</span></div></div></div></div></div>
@@ -1067,6 +1082,106 @@
       });
     }
 
+    // Scroll-reveal & micro-motion: tag element groups with staggered delays,
+    // reveal each as it enters the viewport. Skipped under reduced motion.
+    if(!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)){
+      document.documentElement.classList.add('lb-anim');
+      var rvEls=[];
+      var rvTag=function(el, d, cls){
+        if(!el || el.dataset.rv) return;
+        el.dataset.rv='1';
+        (cls||'lb-rv').split(' ').forEach(function(c){ el.classList.add(c); });
+        el.style.setProperty('--rvd', Math.round(d||0)+'ms');
+        rvEls.push(el);
+      };
+      var rvGrp=function(list, step, base, cls){
+        [].slice.call(list).forEach(function(el, i){ rvTag(el, (base||0)+i*step, cls); });
+      };
+      // hero: headline -> subtitle -> buttons, then tab strip -> demo frame
+      var heroBox=document.querySelector('#top > div');
+      if(heroBox) rvGrp(heroBox.children, 140);
+      document.querySelectorAll('.lb-tabstate > div').forEach(function(box){
+        rvGrp(box.children, 170, 300);
+      });
+      // feature sections: text elements one at a time, screenshot pops after
+      document.querySelectorAll('#how .lb-reveal').forEach(function(blk){
+        var img=null, txt=null;
+        [].slice.call(blk.children).forEach(function(k){
+          if(/position:\s*relative/.test(k.getAttribute('style')||'')) img=k; else txt=k;
+        });
+        if(txt && txt.children.length) rvGrp(txt.children, 100);
+        if(img) rvTag(img, 220, 'lb-rv lb-rv-pop');
+      });
+      // mosaic: heading, then the float cards pop in one by one
+      rvTag(document.querySelector('.lb-heading-mid'), 0);
+      rvGrp(document.querySelectorAll('.lb-mcol .lb-float-card'), 90, 120, 'lb-rv lb-rv-pop');
+      // loop: heading, stage cards cascade 1->5 around the circle, then panel
+      var loopHead=document.querySelector('#loop h2');
+      if(loopHead && loopHead.parentElement) rvGrp(loopHead.parentElement.children, 120);
+      rvGrp(document.querySelectorAll('[data-lb-card]'), 110, 150, 'lb-rv lb-rv-pop');
+      rvGrp(document.querySelectorAll('.lb-loop-detail'), 0, 700);
+      rvGrp(document.querySelectorAll('.lb-loop-legend > *'), 80);
+      // FAQ rows, CTA card, and any remaining old reveal blocks
+      rvGrp(document.querySelectorAll('#faq .lb-faq-q'), 70);
+      rvTag(document.querySelector('#early-access > div'), 0, 'lb-rv lb-rv-pop');
+      document.querySelectorAll('.lb-reveal').forEach(function(el){
+        if(!el.dataset.rv && !el.querySelector('[data-rv]')) rvTag(el, 0);
+      });
+      // spark bars grow from the baseline once their card is visible
+      rvGrp(document.querySelectorAll('div[style*="height: 44px"] > span, div[style*="height:44px"] > span'), 45, 250, 'lb-bar');
+
+      // belt-and-braces: reveal by measured position on scroll/resize too,
+      // so a stalled observer can never leave content hidden
+      var rvCheck=function(){
+        var vh=window.innerHeight||document.documentElement.clientHeight;
+        rvEls.forEach(function(el){
+          if(el.classList.contains('lb-in')) return;
+          var r=el.getBoundingClientRect();
+          if(!r.width && !r.height) return;
+          if(r.top < vh*0.94 && r.bottom > 0) el.classList.add('lb-in');
+        });
+      };
+      var rvTick=false;
+      var rvOnScroll=function(){
+        if(rvTick) return;
+        rvTick=true;
+        setTimeout(function(){ rvTick=false; rvCheck(); }, 120);
+      };
+      addEventListener('scroll', rvOnScroll, {passive:true});
+      addEventListener('resize', rvOnScroll, {passive:true});
+      // landing directly on an anchor: show that section at once, no cascade
+      if(location.hash || (window.pageYOffset||0) > 50) rvCheck();
+
+      if('IntersectionObserver' in window){
+        var rvIO=new IntersectionObserver(function(es){
+          es.forEach(function(en){
+            if(!en.isIntersecting) return;
+            en.target.classList.add('lb-in');
+            rvIO.unobserve(en.target);
+          });
+        }, {rootMargin:'0px 0px -8% 0px', threshold:0.05});
+        rvEls.forEach(function(el){ rvIO.observe(el); });
+        // stat numbers count up from zero when they come into view
+        var cIO=new IntersectionObserver(function(es){
+          es.forEach(function(en){
+            if(!en.isIntersecting) return;
+            cIO.unobserve(en.target);
+            var el=en.target, end=parseFloat(el.getAttribute('data-lb-count'))||0, t0=null;
+            var stepFn=function(t){
+              if(t0===null) t0=t;
+              var p=Math.min((t-t0)/900, 1);
+              el.textContent=Math.round(end*(1-Math.pow(1-p,3)));
+              if(p<1) requestAnimationFrame(stepFn);
+            };
+            requestAnimationFrame(stepFn);
+            setTimeout(function(){ el.textContent=String(end); }, 1200);
+          });
+        }, {threshold:0.6});
+        document.querySelectorAll('[data-lb-count]').forEach(function(el){ cIO.observe(el); });
+      } else {
+        rvEls.forEach(function(el){ el.classList.add('lb-in'); });
+      }
+    }
 
     // FAQ accordion
     document.querySelectorAll('.lb-faq-q').forEach(function(btn){
