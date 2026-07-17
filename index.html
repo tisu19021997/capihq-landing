@@ -1076,22 +1076,23 @@
       });
     });
 
-    // CTA: "Get early access" opens the MailerLite popup; "Contact us" stays mailto
-    var modal=document.getElementById('lb-modal');
-    function openModal(){ if(!modal)return; modal.hidden=false; document.body.classList.add('lb-modal-open'); var i=modal.querySelector('input[type=email]'); if(i){ setTimeout(function(){ try{ i.focus(); }catch(e){} },60); } }
-    function closeModal(){ if(!modal)return; modal.hidden=true; document.body.classList.remove('lb-modal-open'); }
+    // CTA: "Get early access" and "Contact us" each open their MailerLite popup
+    function lbShow(m){ if(!m)return; m.hidden=false; document.body.classList.add('lb-modal-open'); var i=m.querySelector('input,textarea'); if(i){ setTimeout(function(){ try{ i.focus(); }catch(e){} },60); } }
+    function lbHide(m){ if(!m)return; m.hidden=true; if(!document.querySelector('.lb-modal:not([hidden])')){ document.body.classList.remove('lb-modal-open'); } }
+    var earlyModal=document.getElementById('lb-modal');
+    var contactModal=document.getElementById('lb-modal-contact');
     document.querySelectorAll('[data-lb-mailto="early"]').forEach(function(b){
       b.style.cursor='pointer';
-      b.addEventListener('click', function(e){ e.preventDefault(); openModal(); });
+      b.addEventListener('click', function(e){ e.preventDefault(); lbShow(earlyModal); });
     });
     document.querySelectorAll('[data-lb-mailto="contact"]').forEach(function(b){
       b.style.cursor='pointer';
-      b.addEventListener('click', function(){ window.location.href='mailto:quangphamm1902@gmail.com?subject=Capi%20contact'; });
+      b.addEventListener('click', function(e){ e.preventDefault(); lbShow(contactModal); });
     });
-    if(modal){
-      modal.querySelectorAll('[data-lb-close]').forEach(function(x){ x.addEventListener('click', closeModal); });
-      document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !modal.hidden){ closeModal(); } });
-    }
+    document.querySelectorAll('.lb-modal').forEach(function(m){
+      m.querySelectorAll('[data-lb-close]').forEach(function(x){ x.addEventListener('click', function(){ lbHide(m); }); });
+    });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ document.querySelectorAll('.lb-modal:not([hidden])').forEach(lbHide); } });
   });
 })();
 </script>
@@ -1100,33 +1101,36 @@
 .lb-modal[hidden]{display:none;}
 .lb-modal-backdrop{position:absolute;inset:0;background:rgba(17,17,17,.5);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);}
 .lb-modal-card{position:relative;z-index:1;width:100%;max-width:400px;animation:lb-modal-in .25s cubic-bezier(.2,.7,.2,1);}
-.lb-modal-card #mlb2-43836269 .ml-form-embedWrapper{box-shadow:0 30px 80px -24px rgba(0,0,0,.45);}
+.lb-modal-card .ml-form-embedWrapper{box-shadow:0 30px 80px -24px rgba(0,0,0,.45);}
 .lb-modal-x{position:absolute;top:-14px;right:-14px;z-index:2;width:32px;height:32px;border-radius:999px;border:0;background:#111;color:#fff;font-size:17px;line-height:32px;text-align:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.3);padding:0;}
 .lb-modal-x:hover{background:#333;}
 @keyframes lb-modal-in{from{opacity:0;transform:translateY(10px) scale(.98);}to{opacity:1;transform:none;}}
 body.lb-modal-open{overflow:hidden;}
 
-#mlb2-43836269.ml-form-embedContainer{box-sizing:border-box;width:100%!important;}
-#mlb2-43836269 *{box-sizing:border-box;}
-#mlb2-43836269 .ml-form-embedWrapper{background:#FFFDF5;border-radius:16px;width:100%;max-width:400px;margin:0 auto;overflow:hidden;}
-#mlb2-43836269 .ml-form-embedBody,#mlb2-43836269 .ml-form-successBody{padding:26px 26px 8px;}
-#mlb2-43836269 .ml-form-embedContent,#mlb2-43836269 .ml-form-successContent{margin:0 0 18px;text-align:left;}
-#mlb2-43836269 h4{font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:28px;line-height:1.1;color:#111;margin:0 0 8px;letter-spacing:-.01em;}
-#mlb2-43836269 p{font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.5;color:#767674;margin:0;}
-#mlb2-43836269 p a{color:#1746BA;text-decoration:underline;}
-#mlb2-43836269 .ml-form-formContent{margin:0 0 14px;}
-#mlb2-43836269 .ml-form-fieldRow{margin:0 0 12px;}
-#mlb2-43836269 input[type=email]{width:100%;background:#fff;color:#111;border:1px solid rgba(17,17,17,.16);border-radius:12px;font-family:'Inter',system-ui,sans-serif;font-size:15px;padding:12px 14px;line-height:1.4;}
-#mlb2-43836269 input[type=email]::placeholder{color:rgba(17,17,17,.4);}
-#mlb2-43836269 input[type=email]:focus{outline:none;border-color:#1746BA;box-shadow:0 0 0 3px rgba(23,70,186,.15);}
-#mlb2-43836269 .ml-form-embedSubmit{margin:0 0 22px;}
-#mlb2-43836269 .ml-form-embedSubmit button{width:100%;background:#1746BA;color:#fff;border:0;border-radius:999px;font-family:'Inter',system-ui,sans-serif;font-size:15px;font-weight:600;padding:12px;cursor:pointer;transition:background .15s ease;}
-#mlb2-43836269 .ml-form-embedSubmit button:hover{background:#143690;}
-#mlb2-43836269 .ml-form-embedSubmit button.loading{display:none;}
-#mlb2-43836269 .ml-error input{border-color:#D65A4C!important;}
-#mlb2-43836269 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
-#mlb2-43836269 .ml-form-embedSubmitLoad{display:inline-block;width:20px;height:20px;}
-#mlb2-43836269 .ml-form-embedSubmitLoad:after{content:" ";display:block;width:11px;height:11px;margin:1px;border-radius:50%;border:4px solid #fff;border-color:#fff #fff #fff transparent;animation:ml-form-embedSubmitLoad 1.2s linear infinite;}
+.lb-modal-card .ml-form-embedContainer{box-sizing:border-box;width:100%!important;}
+.lb-modal-card .ml-form-embedContainer *{box-sizing:border-box;}
+.lb-modal-card .ml-form-embedHeader{display:none;}
+.lb-modal-card .ml-form-embedWrapper{background:#FFFDF5;border-radius:16px;width:100%;max-width:400px;margin:0 auto;overflow:hidden;}
+.lb-modal-card .ml-form-embedBody,.lb-modal-card .ml-form-successBody{padding:26px 26px 8px;}
+.lb-modal-card .ml-form-embedContent,.lb-modal-card .ml-form-successContent{margin:0 0 18px;text-align:left;}
+.lb-modal-card h4{font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:28px;line-height:1.1;color:#111;margin:0 0 8px;letter-spacing:-.01em;}
+.lb-modal-card .ml-form-embedContent p,.lb-modal-card .ml-form-successContent p{font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.5;color:#767674;margin:0;}
+.lb-modal-card p a{color:#1746BA;text-decoration:underline;}
+.lb-modal-card .ml-form-formContent{margin:0 0 14px;}
+.lb-modal-card .ml-form-fieldRow{margin:0 0 12px;}
+.lb-modal-card .ml-field-group label{display:none;}
+.lb-modal-card input[type=email],.lb-modal-card input[type=text],.lb-modal-card textarea{width:100%;background:#fff;color:#111;border:1px solid rgba(17,17,17,.16);border-radius:12px;font-family:'Inter',system-ui,sans-serif;font-size:15px;padding:12px 14px;line-height:1.4;box-sizing:border-box;}
+.lb-modal-card textarea{min-height:96px;resize:vertical;}
+.lb-modal-card input::placeholder,.lb-modal-card textarea::placeholder{color:rgba(17,17,17,.4);}
+.lb-modal-card input:focus,.lb-modal-card textarea:focus{outline:none;border-color:#1746BA;box-shadow:0 0 0 3px rgba(23,70,186,.15);}
+.lb-modal-card .ml-form-embedSubmit{margin:0 0 22px;}
+.lb-modal-card .ml-form-embedSubmit button{width:100%;background:#1746BA;color:#fff;border:0;border-radius:999px;font-family:'Inter',system-ui,sans-serif;font-size:15px;font-weight:600;padding:12px;cursor:pointer;transition:background .15s ease;}
+.lb-modal-card .ml-form-embedSubmit button:hover{background:#143690;}
+.lb-modal-card .ml-form-embedSubmit button.loading{display:none;}
+.lb-modal-card .ml-error input,.lb-modal-card .ml-error textarea{border-color:#D65A4C!important;}
+.lb-modal-card .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+.lb-modal-card .ml-form-embedSubmitLoad{display:inline-block;width:20px;height:20px;}
+.lb-modal-card .ml-form-embedSubmitLoad:after{content:" ";display:block;width:11px;height:11px;margin:1px;border-radius:50%;border:4px solid #fff;border-color:#fff #fff #fff transparent;animation:ml-form-embedSubmitLoad 1.2s linear infinite;}
 @keyframes ml-form-embedSubmitLoad{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
 </style>
 
@@ -1183,6 +1187,70 @@ function ml_webform_success_43836269(){
   if(f){ f.style.display='none'; }
 }
 </script>
+<div id="lb-modal-contact" class="lb-modal" hidden>
+  <div class="lb-modal-backdrop" data-lb-close></div>
+  <div class="lb-modal-card" role="dialog" aria-modal="true" aria-label="Contact us">
+    <button class="lb-modal-x" data-lb-close aria-label="Close">&times;</button>
+
+    <div id="mlb2-43837748" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-43837748">
+      <div class="ml-form-align-center">
+        <div class="ml-form-embedWrapper embedForm">
+          <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+            <div class="ml-form-embedContent">
+              <h4>Get in touch</h4>
+              <p>Send a note, we'd love to hear from you.</p>
+            </div>
+            <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2515095/forms/193219511003908082/subscribe" data-code="" method="post" target="_blank">
+              <div class="ml-form-formContent">
+                <div class="ml-form-fieldRow">
+                  <div class="ml-field-group ml-field-name">
+                    <input aria-label="name" type="text" class="form-control" data-inputmask="" name="fields[name]" placeholder="Your name" autocomplete="given-name">
+                  </div>
+                </div>
+                <div class="ml-form-fieldRow">
+                  <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                    <input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="you@company.com" autocomplete="email">
+                  </div>
+                </div>
+                <div class="ml-form-fieldRow ml-last-item">
+                  <div class="ml-field-group ml-field-company ml-validate-required">
+                    <textarea class="form-control" name="fields[company]" aria-label="message" aria-required="true" maxlength="1024" placeholder="How can we help?"></textarea>
+                  </div>
+                </div>
+              </div>
+              <input type="hidden" name="ml-submit" value="1">
+              <div class="ml-form-embedSubmit">
+                <button type="submit" class="primary">Send message</button>
+                <button disabled="disabled" style="display: none;" type="button" class="loading">
+                  <div class="ml-form-embedSubmitLoad"></div>
+                  <span class="sr-only">Loading...</span>
+                </button>
+              </div>
+              <input type="hidden" name="anticsrf" value="true">
+            </form>
+          </div>
+          <div class="ml-form-successBody row-success" style="display: none">
+            <div class="ml-form-successContent">
+              <h4>Got it, thanks</h4>
+              <p>Your message is in. We'll reply at the email you gave us, usually within a day or two.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>
+function ml_webform_success_43837748(){
+  var s=document.querySelector('.ml-subscribe-form-43837748 .row-success');
+  var f=document.querySelector('.ml-subscribe-form-43837748 .row-form');
+  if(s){ s.style.display='block'; }
+  if(f){ f.style.display='none'; }
+}
+</script>
+<script>fetch("https://assets.mailerlite.com/jsonp/2515095/forms/193219511003908082/takel")</script>
+
 <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
 <script>fetch("https://assets.mailerlite.com/jsonp/2515095/forms/193211958743270600/takel")</script>
 
