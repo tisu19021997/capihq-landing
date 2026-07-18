@@ -1007,6 +1007,19 @@
       document.querySelectorAll('#lb-tabs > .lb-tabstate').forEach(function(el){
         var on = el.getAttribute('data-lb-tab')===name;
         el.style.display = on ? '' : 'none';
+        // Every panel but the one shown at load is display:none when the
+        // scroll-reveal pass runs, so its .lb-rv children (the tab strip and
+        // the demo frame) never intersect, never get .lb-in, and stay at
+        // opacity:0 — the rvCheck fallback skips them too, since a
+        // display:none element measures 0x0. Reveal them as the panel is
+        // shown, with no stagger: that cascade is for scrolling into a
+        // section, not for switching tabs.
+        if(on){
+          el.querySelectorAll('.lb-rv:not(.lb-in)').forEach(function(r){
+            r.style.setProperty('--rvd','0ms');
+            r.classList.add('lb-in');
+          });
+        }
         el.querySelectorAll('video').forEach(function(v){
           if(on){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } else { v.pause&&v.pause(); }
         });
